@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'blog/base.html'%}
+{% load bootstrap3 %}
+
+{% block content%}
+
+<section id="loginform" class="outer-wrapper">
+  <div class="inner-wrapper">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <h1>Please login:</h1>
+      <h3>(Must be superuser, Please check with the site admin)</h3>
+
+      {%if form.errors %}
+      <p>Your username and password didn't match! please try again</p>
+      {% endif %}
+      <form role="form" action="{% url 'login'%}" method="POST">
+        <div class="form-group">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+        </div>
+        <input type="submit" class="btn btn-default" value="Login">
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+  <div class="jumbotron">
+    <h1>Please login:</h1>
+    <h3>(Must be superuser, Please check with the site admin)</h3>
+
+    {%if form.errors %}
+    <p>Your username and password didn't match! please try again</p>
+    {% endif %}
+
+    <form action="{% url 'login'%}" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input class = 'btn btn-primary' type="submit" value="Login">
+      <input type="hidden" name="next" value="{{next}}">
+    </form>
+
+  </div>
+</div> -->
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'blog/base.html'%}
+
+{% block content%}
+
+<!-- <div class="centerstage">
+  {% for post in post_list %}
+  <div class="post">
+    <h1> <a href="{% url 'post_detail' pk=post.pk %}"> {{post.title}}</a> </h1>
+      <p class = 'postcontent'>{{post.text|safe|linebreaks}}</p>
+    <div class="date">
+      <p>Published on : {{post.published_date|date:"D M Y"}}</p>
+    </div>
+    <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.approve_comments.count}}</a>
+  </div>
+  {% endfor %}
+</div> -->
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8">
+          <hr>
+          {% for post in post_list %}
+            {% if post.image %}
+                <img class="img-responsive" src="{{post.image.url}}" width="900px" height="300px" alt="Card image cap" >
+            {% endif %}
+            <hr>
+          <div class="card-body">
+            <h2 class="card-title"> <a href="{% url 'post_detail' pk=post.pk %}"> {{post.title}}</a></h2>
+            <p class="card-text">{{post.text|safe|linebreaks}}</p>
+            <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+          </div>
+          <br>
+          <div class="card-footer text-muted">
+            Posted on: {{post.published_date|date:"D M Y"}}
+            <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.approve_comments.count}}</a>
+          </div>
+          <hr>
+          {% endfor %}
+      </div>
+
+      <div class="col-md-4">
+
+          <!-- Blog Search Well -->
+          <div class="well">
+              <h4>Blog Search</h4>
+              <form method="GET" action="{% url 'post_list'%}">
+              <div class="input-group">
+                  <input type="text" name='q' class="form-control">
+                  <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit" value="search">
+                          <span class="glyphicon glyphicon-search"></span>
+                  </button>
+                  </span>
+              </div>
+              </form>
+              <!-- /.input-group -->
+          </div>
+    </div>
+</div>
+
+</div>
+
+
+
+{% endblock%}
